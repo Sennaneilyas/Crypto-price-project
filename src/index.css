@@ -5,8 +5,18 @@
 }
 
 :root {
-  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto",
-    "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+  font-family:
+    "Inter",
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    "Roboto",
+    "Oxygen",
+    "Ubuntu",
+    "Cantarell",
+    "Fira Sans",
+    "Droid Sans",
+    "Helvetica Neue",
     sans-serif;
   line-height: 1.5;
   font-weight: 400;
@@ -173,6 +183,35 @@ body {
   padding: 2rem;
 }
 
+.home-page {
+  min-height: 100vh;
+  background: radial-gradient(circle at top, rgba(15, 23, 42, 0.95), #020617 65%);
+  color: #e5e7eb;
+}
+
+.page-header {
+  max-width: 1200px;
+  margin: 0 30px 1.5rem;
+  padding: 1.75rem 2rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 1.5rem;
+  backdrop-filter: blur(20px);
+}
+
+.page-header h1 {
+  margin: 0;
+  font-size: 2rem;
+  color: #f8fafc;
+}
+
+.page-header .count {
+  margin: 0.75rem 0 0;
+  color: #9ca3af;
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+
 .crypto-container.grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
@@ -288,7 +327,14 @@ body {
   font-weight: 600;
   padding: 0.5rem 1rem;
   border-radius: 8px;
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px
+}
+
+.change-icon {
+  width: 20px;
+  height: 20px;
 }
 
 .crypto-price .change.positive {
