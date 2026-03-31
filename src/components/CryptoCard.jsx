@@ -14,7 +14,7 @@ export const CryptoCard = ({ crypto }) => {
                         <div className="symbol">{crypto?.symbol?.toUpperCase()}</div>
                     </div>
                 </div>
-                <div className="rank">#{crypto?.market_cap_rank}</div>
+                <div className="rank" style={{color: "white"}}>#{crypto?.market_cap_rank}</div>
             </div>
 
             <div className="crypto-price">
