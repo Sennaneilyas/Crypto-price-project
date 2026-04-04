@@ -26,48 +26,40 @@ export const CoinDetail = () => {
 
     const isPositive = (coin?.market_data?.price_change_percentage_24h ?? 0) >= 0
 
-    const loadCoinData = async () => {
-        try {
-            const data = await fetchCoinData(id)
-            console.log('🔍 Coin API Response:', data)
-
-            if (!data) {
-                setError(true)
-                return
-            }
-            setCoin(data)
-        } catch (error) {
-            console.error('Error loading coin data:', error)
-            setError(true)
-        } finally {
-            setIsLoading(false)
-        }
-    }
-
-    const loadChartData = async () => {
-        try {
-            const data = await fetchChartData(id);
-
-            const formattedData = data.prices.map((price) => ({
-                time: new Date(price[0]).toLocaleDateString("en-US", {
-                    month: "short",
-                    day: "numeric",
-                }),
-                price: price[1].toFixed(2),
-            }));
-
-            setChartData(formattedData);
-        } catch (err) {
-            console.error("Error fetching crypto: ", err);
-        } finally {
-            setIsLoading(false);
-        }
-    }
-
+    // Inside CoinDetail.jsx
     useEffect(() => {
-        loadCoinData()
-        loadChartData()
-    }, [id])
+        const fetchAllData = async () => {
+            setIsLoading(true);
+            setError(false);
+            try {
+                // Run both fetches in parallel
+                const [coinRes, chartRes] = await Promise.all([
+                    fetchCoinData(id),
+                    fetchChartData(id)
+                ]);
+
+                setCoin(coinRes);
+
+                // Format chart data
+                const formattedChartData = chartRes.prices.map((price) => ({
+                    time: new Date(price[0]).toLocaleDateString("en-US", {
+                        month: "short",
+                        day: "numeric",
+                    }),
+                    price: price[1].toFixed(2),
+                }));
+                setChartData(formattedChartData);
+
+            } catch (err) {
+                console.error('Error loading data:', err);
+                setError(true);
+            } finally {
+                setIsLoading(false);
+            }
+        };
+
+        fetchAllData();
+    }, [id]);
 
     if (isLoading) {
         return (
@@ -179,14 +171,14 @@ export const CoinDetail = () => {
                     <div className="stat-card">
                         <span className="stat-label">Market Cap</span>
                         <span className="stat-value">
-                            ${formatMarketCap(coin.market_data.market_cap.usd)}
+                            ${coin.market_data.market_cap.usd.toLocaleString('en-US')}
                         </span>
                     </div>
 
                     <div className="stat-card">
                         <span className="stat-label">Volume (24)</span>
                         <span className="stat-value">
-                            ${formatMarketCap(coin.market_data.total_volume.usd)}
+                            ${coin.market_data.total_volume.usd.toLocaleString('en-US')}
                         </span>
                     </div>
 
