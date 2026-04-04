@@ -31,7 +31,7 @@ export const Home = () => {
 
     const filterAndSort = () => {
         let filtered = cryptoList.filter(crypto =>
-            crypto.name.toLowerCase().includes(searchTerm.toLowerCase())
+            crypto.name.toLowerCase().includes(searchTerm.toLowerCase()) || crypto.symbol.toLowerCase().includes(searchTerm.toLowerCase())
         )
         filtered.sort((a, b) => {
             switch (sortBy) {
