@@ -1,5 +1,6 @@
-import { ArrowUp, ArrowDown } from 'lucide-react'
+import { ArrowUp, ArrowDown, Link as LinkIcon } from 'lucide-react'
 import { formatMarketCap } from '../utils/formatter'
+import { Link } from 'react-router-dom'
 
 export const CryptoCard = ({ crypto }) => {
     const isPositive = crypto?.price_change_percentage_24h >= 0
@@ -7,6 +8,7 @@ export const CryptoCard = ({ crypto }) => {
     return (
         <div className="crypto-card">
             <div className="crypto-header">
+                <Link to={`/coin/${crypto.id}`}><LinkIcon /></Link>
                 <div className="crypto-info">
                     <img src={crypto?.image} alt={crypto?.name} />
                     <div>
@@ -14,7 +16,7 @@ export const CryptoCard = ({ crypto }) => {
                         <div className="symbol">{crypto?.symbol?.toUpperCase()}</div>
                     </div>
                 </div>
-                <div className="rank" style={{color: "white"}}>#{crypto?.market_cap_rank}</div>
+                <div className="rank" style={{ color: "white" }}>#{crypto?.market_cap_rank}</div>
             </div>
 
             <div className="crypto-price">
