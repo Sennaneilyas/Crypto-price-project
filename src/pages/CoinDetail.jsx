@@ -28,7 +28,6 @@ export const CoinDetail = () => {
 
     useEffect(() => {
         const fetchAllData = async () => {
-            setIsLoading(true);
             setError(false);
             try {
                 // Run both fetches in parallel
