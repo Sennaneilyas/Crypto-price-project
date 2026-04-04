@@ -26,7 +26,6 @@ export const CoinDetail = () => {
 
     const isPositive = (coin?.market_data?.price_change_percentage_24h ?? 0) >= 0
 
-    // Inside CoinDetail.jsx
     useEffect(() => {
         const fetchAllData = async () => {
             setIsLoading(true);
